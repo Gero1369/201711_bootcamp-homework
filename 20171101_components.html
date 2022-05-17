@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<title>Some title for this page</title>
+		<script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+		<script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+    </head>
+    <body>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Balance</th>
+                <th>email</th>
+            </tr>
+        </thead>
+        <tbody id="content">
+            <tr><td>Nothing to see here.</td></tr>
+        </tbody>
+        </table>
+        
+        <script type="text/javascript">
+
+            const data = [{name:'Azat', bal:'10000', email:'hi@azat.co'}
+                        ,{name:'Geoff',bal:'1369',email:'geoff@gero1369.com'}
+                        ,{name:'Bob',bal:'100',email:'me@poorbob.com'}
+                        ,{name:'Rich',bal:'9999999',email:'rich@yourrichfriend.com'}
+                        ,{name:'Badass',bal:'666999',email:'mmm@mrmoneymustache.com'}]
+
+
+            class rows extends React.Component{
+                render(){
+                    const Row = this.props.data.map(
+                        (rowData,index)=>{ return React.createElement(cell,{rowData:rowData,key:index}) }
+                    )
+                    return React.createElement('tr',null,Row)
+                }
+            }
+
+            class cell extends React.Component{
+                render(){
+                    const name = React.createElement('td',null,this.props.rowData.name)
+                    const bal = React.createElement('td',null,this.props.rowData.bal)
+                    const email = React.createElement('td',null,this.props.rowData.email)
+                    return [name, bal, email]
+                }
+            }
+
+			  ReactDOM.render(
+                React.createElement(rows,{data: data}),
+				document.getElementById('content')
+			  )
+        </script>
+    </body>
+</html>
